@@ -8,10 +8,18 @@ export const Header = () => {
   const navItems = [
     { name: "Home", href: "#home" },
     { name: "Services", href: "#services" },
-    { name: "Solutions", href: "#solutions" },
-    { name: "About", href: "#about" },
+    { name: "Certifications", href: "#certifications" },
+    { name: "Process Consulting", href: "#process-consulting" },
     { name: "Contact", href: "#contact" },
   ];
+
+  const scrollToSection = (href: string) => {
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsMenuOpen(false);
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 glass border-b border-glass-border">
@@ -26,13 +34,13 @@ export const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
-              <a
+              <button
                 key={item.name}
-                href={item.href}
+                onClick={() => scrollToSection(item.href)}
                 className="text-foreground hover:text-primary transition-colors duration-300"
               >
                 {item.name}
-              </a>
+              </button>
             ))}
           </nav>
 
@@ -57,14 +65,13 @@ export const Header = () => {
           <nav className="md:hidden mt-4 pb-4 border-t border-glass-border pt-4">
             <div className="flex flex-col gap-4">
               {navItems.map((item) => (
-                <a
+                <button
                   key={item.name}
-                  href={item.href}
-                  className="text-foreground hover:text-primary transition-colors duration-300"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => scrollToSection(item.href)}
+                  className="text-foreground hover:text-primary transition-colors duration-300 text-left"
                 >
                   {item.name}
-                </a>
+                </button>
               ))}
               <Button variant="hero" size="lg" className="mt-4">
                 Get Protected
